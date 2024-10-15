@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Registros</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <h1>Lista de Registros</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Primeiro Nome</th>
+                <th>Último Nome</th>
+                <th>Email</th>
+                <th>Tipo de Conta</th>
+                <th>Idade</th>
+                <th>Referência</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody id="tabela-registros">
+            <!-- Os registros serão inseridos aqui via JavaScript -->
+        </tbody>
+    </table>
+    <br>
+    <button onclick="redirectToCadastro()">Voltar ao Cadastro</button>
+
+    <script>
+        // Função para redirecionar para a página de cadastro
+        function redirectToCadastro() {
+            window.location.href = 'index.html';
+        }
+
+        // Função para carregar os registros e exibir na tabela
+        window.onload = function() {
+            const registros = JSON.parse(localStorage.getItem('registros')) || [];
+            const tabela = document.getElementById('tabela-registros');
+
+            registros.forEach(registro => {
+                const linha = document.createElement('tr');
+
+                // Cria as células da tabela
+                const primeiroNome = document.createElement('td');
+                primeiroNome.textContent = registro.primeiroNome;
+                linha.appendChild(primeiroNome);
+
+                const ultimoNome = document.createElement('td');
+                ultimoNome.textContent = registro.ultimoNome;
+                linha.appendChild(ultimoNome);
+
+                const email = document.createElement('td');
+                email.textContent = registro.email;
+                linha.appendChild(email);
+
+                const tipoConta = document.createElement('td');
+                tipoConta.textContent = registro.tipoConta;
+                linha.appendChild(tipoConta);
+
+                const idade = document.createElement('td');
+                idade.textContent = registro.idade;
+                linha.appendChild(idade);
+
+                const referencia = document.createElement('td');
+                referencia.textContent = registro.referencia;
+                linha.appendChild(referencia);
+
+                const bio = document.createElement('td');
+                bio.textContent = registro.bio;
+                linha.appendChild(bio);
+
+                tabela.appendChild(linha);
+            });
+
+            if (registros.length === 0) {
+                const linha = document.createElement('tr');
+                const celula = document.createElement('td');
+                celula.setAttribute('colspan', '7');
+                celula.textContent = 'Nenhum registro encontrado.';
+                linha.appendChild(celula);
+                tabela.appendChild(linha);
+            }
+        };
+    </script>
+</body>
+</html>

@@ -29,7 +29,7 @@
                       <option value="3">Cagece-atendimentos</option>
                       <option value="4">Outro</option>
                     </select>
-                    <label for="bio">Descricap:
+                    <label for="bio">Descricao:
                         <textarea id="bio" name="bio" rows="4" cols="35" placeholder="Cagece"></textarea>
                       </label>
                     </fieldset>
@@ -38,6 +38,48 @@
                       </label>
                       <input type="submit" value="Submit" />
                     </form>
+
+                    
+
+                    <script>
+                      // Função para redirecionar para a página de listagem
+                      function redirectToListagem() {
+                          window.location.href = 'listagem.html';
+                      }
+              
+                      // Função para salvar dados no localStorage
+                      document.getElementById('cadastro-form').addEventListener('submit', function(e) {
+                          e.preventDefault(); // Evita o comportamento padrão de envio do formulário
+                          
+                          // Coleta os dados do formulário
+                          const formData = {
+                              primeiroNome: document.getElementById('primeiro-nome').value,
+                              ultimoNome: document.getElementById('ultimo-nome').value,
+                              email: document.getElementById('email').value,
+                              senha: document.getElementById('senha').value,
+                              tipoConta: document.querySelector('input[name="tipo-conta"]:checked').value,
+                              idade: document.getElementById('idade').value,
+                              referencia: document.getElementById('referencia').value,
+                              bio: document.getElementById('bio').value
+                          };
+              
+                          // Obtém os registros existentes ou inicializa um array vazio
+                          let registros = JSON.parse(localStorage.getItem('registros')) || [];
+                          
+                          // Adiciona o novo registro
+                          registros.push(formData);
+                          
+                          // Salva de volta no localStorage
+                          localStorage.setItem('registros', JSON.stringify(registros));
+                          
+                          // Limpa o formulário
+                          document.getElementById('cadastro-form').reset();
+                          alert('Registro salvo com sucesso!');
+                      });
+                  </script>
+              </body>
+              </html>
+
                   </body>
                 </html>
 
