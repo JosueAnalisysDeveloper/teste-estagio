@@ -8,81 +8,48 @@
 </head>
 <body>
     <h1>Forma de Registro</h1>
-    <p>abaixo preencha suas informacoes</p>
-    
-    <fieldset>
-        <label for="primeiro-Nome">Digite seu primeiro nome: <input id="primeiro-nome" name="primeiro-nome" type="text" required  ></label>
-        <label for="ultimo-Nome">digite seu ultimo nome: <input id="ultimo-nome" name="ultimo-nome" type="text" required></label>
-        <label for="email">Digite Seu Email <input id="email" name="email" type="text" required></label>
-        <label for="password">Digite sua senha nova: <input id="senha" name="senha" type="password" pattern="[a-z0-5]{8,}" required></label>
-    </fieldset>
+    <p>Abaixo preencha suas informações</p>
+    <form id="registroForm">
         <fieldset>
-            <legend>Tipo de conta </legend>
-            <label for="Conta-Pessoal"><input id="Conta-Pessoal" type="radio" name="conta-pessoal" class="inline" checked> Pessoal</label>
-                <label for="Conta-Negocio"><input idn="conta-negocio" type="radio" name="conta-negocio" class="inline"> Negocios </label>
-                <label for="idade">Que Idade você tem?: <input id="idade" type="number" name="idade" min="18" max="150" /></label>
-                <label for="referencia">como voce ouviu falar de nois?
-                    <select id="referencia" name="referencia">
-                      <option value="">(selecione)</option>
-                      <option value="1">Cagece-Noticias</option>
-                      <option value="2">Cagece-Servicos</option>
-                      <option value="3">Cagece-atendimentos</option>
-                      <option value="4">Outro</option>
-                    </select>
-                    <label for="bio">Descricao:
-                        <textarea id="bio" name="bio" rows="4" cols="35" placeholder="Cagece"></textarea>
-                      </label>
-                    </fieldset>
-                    <label for="termos-condicoes">
-                        <input class="inline" id="termos-condicoes" type="checkbox" required name="termos-condicoes" /> I accept the <a href="https://www.jusbrasil.com.br/artigos/eu-li-e-concordo-com-os-termos-de-uso-qual-a-importancia-desses-contratos-para-seu-negocio/1157354573">terms and conditions</a>
-                      </label>
-                      <input type="submit" value="Submit" />
-                    </form>
+            <label for="primeiro-Nome">Digite seu primeiro nome: <input id="primeiro-nome" name="primeiro-nome" type="text" required></label>
+            <label for="ultimo-Nome">Digite seu último nome: <input id="ultimo-nome" name="ultimo-nome" type="text" required></label>
+            <label for="email">Digite seu email: <input id="email" name="email" type="text" required></label>
+            <label for="idade">Digite sua idade: <input id="idade" type="number" name="idade" min="18" max="150" /></label>
+            <label for="password">Digite sua senha: <input id="senha" name="senha" type="password"></label>
+            
+        </fieldset>
+        <fieldset>
+            <legend>Tipo de conta</legend>
+            <label for="pessoal"><input id="pessoal" type="radio" name="tipo-conta" class="inline" checked /> Pessoal</label>
+            <label for="empresa"><input id="empresa" type="radio" name="tipo-conta" class="inline" /> Empresa</label>
+            <label for="referencia">Como você ouviu falar de nós?
+                <select id="referencia" name="referencia">
+                    <option value="">(selecione)</option>
+                    <option value="1">Cagece-Noticias</option>
+                    <option value="2">Cagece-Servicos</option>
+                    <option value="3">Cagece-Atendimentos</option>
+                    <option value="4">Outro</option>
+                </select>
+            </label>
+            <label for="bio">Descrição:
+                <textarea id="bio" name="bio" rows="4" cols="35" placeholder="Cagece"></textarea>
+            </label>
+        </fieldset>
+        <label for="termos-condicoes">
+            <input class="inline" id="termos-condicoes" type="checkbox" required name="termos-condicoes" /> I accept the <a href="https://www.jusbrasil.com.br/artigos/eu-li-e-concordo-com-os-termos-de-uso-qual-a-importancia-desses-contratos-para-seu-negocio/1157354573">terms and conditions</a>
+        </label>
+        <input type="submit" value="Salvar" />
+    </form>
 
-                    
+    <!-- Botão para redirecionar à página de listagem -->
+    <button onclick="redirectToListagem()" class="btn">Ver Registros</button>
 
-                    <script>
-                      // Função para redirecionar para a página de listagem
-                      function redirectToListagem() {
-                          window.location.href = 'listagem.html';
-                      }
-              
-                      // Função para salvar dados no localStorage
-                      document.getElementById('cadastro-form').addEventListener('submit', function(e) {
-                          e.preventDefault(); // Evita o comportamento padrão de envio do formulário
-                          
-                          // Coleta os dados do formulário
-                          const formData = {
-                              primeiroNome: document.getElementById('primeiro-nome').value,
-                              ultimoNome: document.getElementById('ultimo-nome').value,
-                              email: document.getElementById('email').value,
-                              senha: document.getElementById('senha').value,
-                              tipoConta: document.querySelector('input[name="tipo-conta"]:checked').value,
-                              idade: document.getElementById('idade').value,
-                              referencia: document.getElementById('referencia').value,
-                              bio: document.getElementById('bio').value
-                          };
-              
-                          // Obtém os registros existentes ou inicializa um array vazio
-                          let registros = JSON.parse(localStorage.getItem('registros')) || [];
-                          
-                          // Adiciona o novo registro
-                          registros.push(formData);
-                          
-                          // Salva de volta no localStorage
-                          localStorage.setItem('registros', JSON.stringify(registros));
-                          
-                          // Limpa o formulário
-                          document.getElementById('cadastro-form').reset();
-                          alert('Registro salvo com sucesso!');
-                      });
-                  </script>
-              </body>
-              </html>
-
-                  </body>
-                </html>
-
-                    
+    <!-- Link para o arquivo de script -->
+    <script src="script.js"></script>
+    <script>
+        function redirectToListagem() {
+            window.location.href = 'pag.list.html'; // Nome da página de listagem
+        }
+    </script>
 </body>
 </html>
